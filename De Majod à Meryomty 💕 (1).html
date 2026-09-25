@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De Majod Meryomto à Sa Ange 💕</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Dancing+Script:wght@600;700&family=Lato:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --rose: #e8758a;
+      --rose-deep: #c0405c;
+      --rose-glow: #ff6b8a;
+      --blush: #fce8ed;
+      --petal: #f9c5d1;
+      --cream: #fff8f9;
+      --gold: #d4956a;
+      --text: #4a2030;
+      --soft: #9b6070;
+      --purple: #9b59b6;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── CANVAS ─── */
+    #petals-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── INTRO SCREEN ─── */
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a0a10 0%, #3d1020 40%, #1a0a10 100%);
+      overflow: hidden;
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+
+    #intro-screen.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* star sparkles behind intro */
+    .sparkle {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--dur, 2s) ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(.5);
+      }
+
+      50% {
+        opacity: var(--op, .8);
+        transform: scale(1);
+      }
+    }
+
+    .intro-rose-wrap {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .intro-big-heart {
+      font-size: 5rem;
+      animation: heartbeat-big 1.2s ease-in-out infinite;
+      display: block;
+      filter: drop-shadow(0 0 24px #ff6b8a);
+    }
+
+    @keyframes heartbeat-big {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.22);
+      }
+
+      28% {
+        transform: scale(1.05);
+      }
+
+      42% {
+        transform: scale(1.18);
+      }
+
+      56% {
+        transform: scale(1);
+      }
+    }
+
+    .intro-from {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.15rem;
+      color: #f9c5d1;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    .intro-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.6rem, 8vw, 4.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      text-align: center;
+      text-shadow: 0 0 40px rgba(255, 107, 138, .6);
+      opacity: 0;
+      animation: fadeUp .8s .6s ease both;
+    }
+
+    .intro-title span {
+      color: var(--rose-glow);
+    }
+
+    .intro-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #f9c5d1;
+      margin-top: 14px;
+      opacity: 0;
+      animation: fadeUp .8s .9s ease both;
+    }
+
+    .intro-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e8758a, transparent);
+      margin: 22px auto;
+      opacity: 0;
+      animation: fadeUp .5s 1.1s ease both;
+    }
+
+    .intro-btn {
+      margin-top: 8px;
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      border: none;
+      border-radius: 50px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(200, 64, 92, .45), 0 0 0 0 rgba(232, 117, 138, .4);
+      animation: fadeUp .8s 1.3s ease both, pulse-ring 2s 2.2s ease infinite;
+      transition: transform .2s;
+    }
+
+    .intro-btn:hover {
+      transform: scale(1.06);
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 8px 32px rgba(200, 64, 92, .45), 0 0 0 0 rgba(232, 117, 138, .5);
+      }
+
+      70% {
+        box-shadow: 0 8px 32px rgba(200, 64, 92, .45), 0 0 0 18px rgba(232, 117, 138, 0);
+      }
+
+      100% {
+        box-shadow: 0 8px 32px rgba(200, 64, 92, .45), 0 0 0 0 rgba(232, 117, 138, 0);
+      }
+    }
+
+    /* floating roses in intro */
+    .intro-petal {
+      position: absolute;
+      font-size: 1.4rem;
+      animation: floatUp var(--dur, 6s) var(--delay, 0s) ease-in infinite;
+      opacity: 0;
+      bottom: -40px;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+      }
+
+      10% {
+        opacity: .8;
+      }
+
+      90% {
+        opacity: .5;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-110vh) rotate(360deg);
+      }
+    }
+
+    /* ─── MAIN PAGE ─── */
+    .page {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeDown .9s .2s ease both;
+      opacity: 0;
+    }
+
+    .site-header.show {
+      opacity: 1;
+    }
+
+    .header-from {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: var(--soft);
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+
+    .site-header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      font-weight: 700;
+      color: var(--rose-deep);
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(192, 64, 92, .15);
+    }
+
+    .site-header h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--rose-deep), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-hearts {
+      font-size: 1.6rem;
+      letter-spacing: 4px;
+      display: block;
+      margin: 8px 0;
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    .site-header .sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--soft);
+      margin-top: 6px;
+    }
+
+    /* glowing divider */
+    .divider {
+      width: 180px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rose), #c0405c, var(--rose), transparent);
+      margin: 18px auto 0;
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(232, 117, 138, .5);
+    }
+
+    /* ─── QUIZ ─── */
+    #quiz-section {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    /* hearts progress */
+    .progress-hearts {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-size: 1.4rem;
+    }
+
+    .ph {
+      filter: grayscale(1);
+      opacity: .3;
+      transition: filter .4s, opacity .4s, transform .3s;
+    }
+
+    .ph.lit {
+      filter: grayscale(0);
+      opacity: 1;
+      animation: pop .35s ease;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.4);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    ;
+
+    /* ─── QUESTION CARD ─── */
+    .q-card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 40px 36px;
+      box-shadow: 0 8px 48px rgba(200, 64, 92, .12), 0 2px 8px rgba(200, 64, 92, .06);
+      border: 1.5px solid rgba(232, 117, 138, .18);
+      position: relative;
+      overflow: hidden;
+      display: none;
+    }
+
+    /* no overlay — keep cards fully clear */
+    .q-card.active {
+      display: block;
+      animation: cardIn .5s ease both;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* card corner roses */
+    .q-card::after {
+      content: '🌸';
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 1.3rem;
+      opacity: .35;
+    }
+
+    .q-number {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: var(--rose);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .q-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .q-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    /* ─── OPTIONS ─── */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .opt-btn {
+      background: var(--blush);
+      border: 1.5px solid var(--petal);
+      border-radius: 16px;
+      padding: 14px 22px 14px 18px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      transition: background .2s, border-color .2s, transform .15s, box-shadow .2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .opt-btn .opt-bullet {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      color: var(--rose);
+      font-weight: 700;
+      transition: background .2s, color .2s;
+    }
+
+    .opt-btn:hover {
+      background: #fdd5df;
+      border-color: var(--rose);
+      transform: translateX(6px);
+      box-shadow: 0 4px 16px rgba(200, 64, 92, .12);
+    }
+
+    .opt-btn:hover .opt-bullet {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .opt-btn.correct {
+      background: #d4edda;
+      border-color: #5cb85c;
+      color: #2d5a2d;
+      animation: pulse-green .4s ease;
+      transform: translateX(6px);
+    }
+
+    .opt-btn.correct .opt-bullet {
+      background: #5cb85c;
+      border-color: #5cb85c;
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: #fde8ec;
+      border-color: var(--rose-deep);
+      animation: shake .5s ease;
+    }
+
+    .opt-btn:disabled {
+      cursor: default;
+    }
+
+    /* ─── FEEDBACK ─── */
+    .feedback {
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-size: .95rem;
+      line-height: 1.5;
+      display: none;
+      animation: fadeUp .3s ease;
+    }
+
+    .feedback.wrong-msg {
+      display: block;
+      background: linear-gradient(90deg, #fff0f3, #fff8f9);
+      border-left: 4px solid var(--rose-deep);
+      color: var(--rose-deep);
+      font-weight: 600;
+    }
+
+    .feedback.right-msg {
+      display: block;
+      background: linear-gradient(90deg, #f0fff4, #f9fff9);
+      border-left: 4px solid #5cb85c;
+      color: #2d6a2d;
+    }
+
+    /* ─── NEXT BTN ─── */
+    .next-btn {
+      margin-top: 24px;
+      padding: 14px 42px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 6px 24px rgba(200, 64, 92, .30);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(200, 64, 92, .45);
+    }
+
+    .next-btn.visible {
+      display: inline-block;
+      animation: fadeUp .4s ease;
+    }
+
+    /* ─── FINAL ─── */
+    #final-section {
+      display: none;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    #final-section.visible {
+      display: block;
+      animation: fadeUp .9s ease both;
+    }
+
+    .final-card {
+      background: #fff;
+      border-radius: 32px;
+      padding: 56px 52px;
+      box-shadow: 0 16px 72px rgba(200, 64, 92, .16);
+      border: 2px solid rgba(232, 117, 138, .22);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* layered glow border effect */
+    .final-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, #e8758a, #c0405c, #9b59b6, #e8758a);
+      z-index: -1;
+      animation: borderSpin 6s linear infinite;
+      background-size: 300% 300%;
+    }
+
+    @keyframes borderSpin {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .final-card::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 30px;
+      background: #fff;
+      z-index: 0;
+    }
+
+    .final-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .confetti-row {
+      font-size: 1.6rem;
+      letter-spacing: 6px;
+      margin-bottom: 10px;
+      animation: sway 4s ease-in-out infinite;
+    }
+
+    .final-crown {
+      font-size: 4rem;
+      display: block;
+      animation: heartbeat-big 1.4s ease infinite;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 0 16px #ff6b8a);
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      color: #fff;
+      border-radius: 40px;
+      padding: 8px 26px;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(200, 64, 92, .35);
+      letter-spacing: .5px;
+    }
+
+    .final-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--rose-deep);
+      margin-bottom: 30px;
+      text-shadow: 0 2px 16px rgba(192, 64, 92, .2);
+    }
+
+    .final-letter {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(.98rem, 2.2vw, 1.15rem);
+      line-height: 2;
+      color: var(--text);
+      text-align: left;
+      border-top: 1px solid var(--petal);
+      border-bottom: 1px solid var(--petal);
+      padding: 28px 8px;
+      margin-bottom: 28px;
+    }
+
+    .final-letter p+p {
+      margin-top: 18px;
+    }
+
+    .hl {
+      color: var(--rose-deep);
+      font-weight: 700;
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    .final-flowers {
+      font-size: 1.5rem;
+      letter-spacing: 7px;
+      margin: 20px 0 16px;
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    .final-sig {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--soft);
+    }
+
+    /* ─── KEYFRAMES ─── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      16% {
+        transform: translateX(-10px);
+      }
+
+      33% {
+        transform: translateX(9px);
+      }
+
+      50% {
+        transform: translateX(-7px);
+      }
+
+      66% {
+        transform: translateX(6px);
+      }
+
+      83% {
+        transform: translateX(-3px);
+      }
+    }
+
+    @keyframes pulse-green {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.025);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(7px);
+      }
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.16);
+      }
+
+      28% {
+        transform: scale(1);
+      }
+
+      42% {
+        transform: scale(1.1);
+      }
+
+      56% {
+        transform: scale(1);
+      }
+    }
+
+    @media(max-width:560px) {
+
+      .q-card,
+      .final-card {
+        padding: 26px 18px;
+      }
+
+      .site-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .final-card {
+        padding: 32px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- ═══ INTRO SCREEN ═══ -->
+  <div id="intro-screen">
+    <!-- sparkles injected by JS -->
+    <!-- floating petals in intro -->
+    <div class="intro-petal" style="left:5%;--dur:7s;--delay:0s">🌸</div>
+    <div class="intro-petal" style="left:15%;--dur:9s;--delay:1.2s">🌹</div>
+    <div class="intro-petal" style="left:28%;--dur:6s;--delay:.5s">💕</div>
+    <div class="intro-petal" style="left:42%;--dur:8s;--delay:2s">🌷</div>
+    <div class="intro-petal" style="left:58%;--dur:7s;--delay:.3s">💗</div>
+    <div class="intro-petal" style="left:70%;--dur:9s;--delay:1.5s">🌺</div>
+    <div class="intro-petal" style="left:83%;--dur:6.5s;--delay:.8s">💖</div>
+    <div class="intro-petal" style="left:93%;--dur:8s;--delay:1.8s">🌸</div>
+
+    <div class="intro-rose-wrap">
+      <span class="intro-big-heart">💝</span>
+    </div>
+
+    <p class="intro-from">De la part de <strong style="color:#f9c5d1;">Majod Meryomto</strong></p>
+
+    <h1 class="intro-title">
+      Pour Mon petite<br /><span>Meryomto</span>
+    </h1>
+
+    <p class="intro-sub">Mon petit ange, la plus belle de toutes 🌸</p>
+    <div class="intro-divider"></div>
+
+    <button class="intro-btn" onclick="startQuiz()">
+      Ouvrir 💌
+    </button>
+  </div>
+
+  <!-- ═══ MAIN PAGE ═══ -->
+  <div class="page">
+
+    <header class="site-header" id="site-header">
+      <p class="header-from">De Majod Meryomto 💌 à mon petite Meryomto</p>
+      <span class="header-hearts">🌸 💕 🌹 💖 🌷</span>
+      <h1>Pour <em>Meryomty</em></h1>
+      <p class="sub">Mon petit ange qui illumine chaque jour 🌺</p>
+      <div class="divider"></div>
+    </header>
+
+    <!-- ── QUIZ ── -->
+    <section id="quiz-section">
+
+      <!-- hearts progress -->
+      <div class="progress-hearts" id="progress-hearts">
+        <span class="ph" id="ph1">❤️</span>
+        <span class="ph" id="ph2">❤️</span>
+        <span class="ph" id="ph3">❤️</span>
+        <span class="ph" id="ph4">💙</span>
+        <span class="ph" id="ph5">💖</span>
+        <span class="ph" id="ph6">💕</span>
+      </div>
+
+      <!-- Q1 -->
+      <div class="q-card active" id="q1">
+        <div class="q-number">Question 1 sur 6</div>
+        <span class="q-icon">🌹</span>
+        <div class="q-text">Est-ce que tu m'aimes ?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="answer(this,false,1)"><span class="opt-bullet">A</span>Peut-être un
+            peu…</button>
+          <button class="opt-btn" onclick="answer(this,true, 1)"><span class="opt-bullet">B</span>Oui 💕</button>
+          <button class="opt-btn" onclick="answer(this,false,1)"><span class="opt-bullet">C</span>Je ne sais pas
+            vraiment</button>
+          <button class="opt-btn" onclick="answer(this,false,1)"><span class="opt-bullet">D</span>Pas du tout</button>
+        </div>
+        <div class="feedback" id="fb1"></div>
+        <button class="next-btn" id="next1" onclick="nextQ(1,2)">Question suivante 🌸</button>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-card" id="q2">
+        <div class="q-number">Question 2 sur 6</div>
+        <span class="q-icon">💗</span>
+        <div class="q-text">À quel point tu m'aimes ?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="answer(this,false,2)"><span class="opt-bullet">A</span>Un tout petit
+            peu</button>
+          <button class="opt-btn" onclick="answer(this,false,2)"><span class="opt-bullet">B</span>Assez bien</button>
+          <button class="opt-btn" onclick="answer(this,true, 2)"><span class="opt-bullet">C</span>Plus que tu ne le
+            penses 💗</button>
+          <button class="opt-btn" onclick="answer(this,false,2)"><span class="opt-bullet">D</span>Comme n'importe qui
+            d'autre</button>
+        </div>
+        <div class="feedback" id="fb2"></div>
+        <button class="next-btn" id="next2" onclick="nextQ(2,3)">Question suivante 🌷</button>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-card" id="q3">
+        <div class="q-number">Question 3 sur 6</div>
+        <span class="q-icon">🌷</span>
+        <div class="q-text">Est-ce que tu penses à moi ?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="answer(this,false,3)"><span class="opt-bullet">A</span>Parfois,
+            rarement</button>
+          <button class="opt-btn" onclick="answer(this,true, 3)"><span class="opt-bullet">B</span>Oui 🥰</button>
+          <button class="opt-btn" onclick="answer(this,false,3)"><span class="opt-bullet">C</span>Presque
+            jamais</button>
+          <button class="opt-btn" onclick="answer(this,false,3)"><span class="opt-bullet">D</span>Non, jamais</button>
+        </div>
+        <div class="feedback" id="fb3"></div>
+        <button class="next-btn" id="next3" onclick="nextQ(3,4)">Question suivante 💐</button>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-card" id="q4">
+        <div class="q-number">Question 4 sur 6</div>
+        <span class="q-icon">💖</span>
+        <div class="q-text">À quel point tu penses à moi ?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="answer(this,false,4)"><span class="opt-bullet">A</span>De temps en temps
+            seulement</button>
+          <button class="opt-btn" onclick="answer(this,false,4)"><span class="opt-bullet">B</span>Quand je n'ai rien à
+            faire</button>
+          <button class="opt-btn" onclick="answer(this,false,4)"><span class="opt-bullet">C</span>À peine,
+            parfois</button>
+          <button class="opt-btn" onclick="answer(this,true, 4)"><span class="opt-bullet">D</span>Plus que tout le reste
+            💝</button>
+        </div>
+        <div class="feedback" id="fb4"></div>
+        <button class="next-btn" id="next4" onclick="nextQ(4,5)">Question suivante 🌹</button>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-card" id="q5">
+        <div class="q-number">Question 5 sur 6</div>
+        <span class="q-icon">🌺</span>
+        <div class="q-text">Est-ce que tu es à moi ?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="answer(this,true, 5)"><span class="opt-bullet">A</span>Bien sûr, rien qu'à
+            toi 💞</button>
+          <button class="opt-btn" onclick="answer(this,false,5)"><span class="opt-bullet">B</span>On verra un
+            jour…</button>
+          <button class="opt-btn" onclick="answer(this,false,5)"><span class="opt-bullet">C</span>Je ne sais pas
+            encore</button>
+          <button class="opt-btn" onclick="answer(this,false,5)"><span class="opt-bullet">D</span>Pas forcément</button>
+        </div>
+        <div class="feedback" id="fb5"></div>
+        <button class="next-btn" id="next5" onclick="nextQ(5,6)">Dernière question 💌</button>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q-card" id="q6">
+        <div class="q-number">Question 6 sur 6</div>
+        <span class="q-icon">💝</span>
+        <div class="q-text">Est-ce que je suis à toi ?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="answer(this,false,6)"><span class="opt-bullet">A</span>Je suppose que
+            oui…</button>
+          <button class="opt-btn" onclick="answer(this,false,6)"><span class="opt-bullet">B</span>Peut-être un
+            peu</button>
+          <button class="opt-btn" onclick="answer(this,true, 6)"><span class="opt-bullet">C</span>Bien sûr, rien qu'à
+            moi 💗</button>
+          <button class="opt-btn" onclick="answer(this,false,6)"><span class="opt-bullet">D</span>Je ne pense pas
+            vraiment</button>
+        </div>
+        <div class="feedback" id="fb6"></div>
+        <button class="next-btn" id="next6" onclick="showFinal()">Découvrir la surprise 🌸✨</button>
+      </div>
+
+    </section>
+
+    <!-- ── FINAL LETTER ── -->
+    <section id="final-section">
+      <div class="final-card">
+        <div class="final-inner">
+          <div class="confetti-row">🌸 🌹 💕 🌷 💖 🌺 💗 🌼</div>
+          <span class="final-crown">💝</span>
+          <div class="score-badge">🌸 &nbsp;La plus gentille, la plus belle, la plus affectueuse, la plus douce et la
+            plus mignonne&nbsp; 🌸</div>
+          <h2 class="final-title">Ma petite Meryomty 🌹</h2>
+
+          <div class="final-letter">
+            <p>🌸 Ma <span class="hl">petite Meryomty</span>,</p>
+
+            <p>Je t'aime tellement plus que tu ne pourrais jamais l'imaginer. Tu es
+              mon <span class="hl">ange adorée</span>, ma lumière éclatante dans l'obscurité
+              des jours les plus sombres. Je pense à toi à chaque instant, à chaque souffle,
+              à chaque battement de mon cœur. 💗</p>
+
+            <p>Je voudrais tant être à tes côtés en ce moment même. Si je le pouvais,
+              je t'enlèverais loin de tout — juste toi et moi — pour rester chaque seconde
+              précieuse auprès de toi, à écouter ta douce et belle voix apporte réconfort et assurance,
+              à contempler ton beau visage et me sentir au septième ciel. 🌸💫</p>
+
+            <p>Je te le promets, <span class="hl">ma jolie Meryomty</span> — à la première
+              occasion qui se présente, je t'enlève 💕 et je ne te laisse plus jamais partir.
+              Tu es à moi, rien qu'à moi.Tu m'appartiens, à moi seul, et je ne te laisserai aller à personne d'autre. Je
+              ferai tout pour te garder auprès de moi. Je te protégerai et prendrai grand soin de toi. Je te
+              rapprocherai toujours plus de moi.
+              Tu es mon <span class="hl">petit ange précieux</span>,
+              la plus mignonne de toutes. 🌷</p>
+
+            <p>Je serai toujours là pour toi, à chaque instant, dans chaque moment —
+              dans tes joies comme dans tes peines. Je t'espère plus proche de moi chaque
+              jour qui passe, ma <span class="hl">petite Meryomty</span>. 🌺</p>
+
+            <p>Je t'aime bien plus que les mots ne peuvent le dire,<br />
+              bien plus que les chiffres ne peuvent le compter,<br />
+              bien plus que l'esprit humain ne peut l'imaginer. 💝</p>
+          </div>
+
+          <div class="final-flowers">🌸 🌹 💕 🌷 💖 🌺 💗 🌼 💞 🌻</div>
+          <p class="final-sig">— De Madjodk mon <em>petite Meryomty</em> 💌</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // ── SPARKLES ──────────────────────────────────────────────────────────────
+    const intro = document.getElementById('intro-screen');
+    for (let i = 0; i < 60; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      const size = 1 + Math.random() * 3;
+      s.style.cssText = `
+    left:${Math.random() * 100}%;top:${Math.random() * 100}%;
+    width:${size}px;height:${size}px;
+    --dur:${1.5 + Math.random() * 3}s;
+    --op:${.4 + Math.random() * .6};
+    animation-delay:${Math.random() * 3}s;
+  `;
+      intro.appendChild(s);
+    }
+
+    // ── PETALS CANVAS ─────────────────────────────────────────────────────────
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+
+    const EMOJIS = ['🌸', '🌹', '🌷', '💕', '💗', '💖', '🌺', '🌼', '💐', '❤️', '💝', '🌻'];
+    const petals = Array.from({ length: 32 }, () => makePetal());
+
+    function makePetal(fromTop = false) {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: fromTop ? -40 : Math.random() * window.innerHeight,
+        size: 13 + Math.random() * 15,
+        speed: .35 + Math.random() * .65,
+        drift: (Math.random() - .5) * .55,
+        sway: Math.random() * Math.PI * 2,
+        swaySpeed: .007 + Math.random() * .014,
+        emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
+        opacity: .28 + Math.random() * .5,
+      };
+    }
+
+    function drawPetals() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of petals) {
+        p.y += p.speed; p.sway += p.swaySpeed;
+        p.x += p.drift + Math.sin(p.sway) * .7;
+        ctx.save(); ctx.globalAlpha = p.opacity;
+        ctx.font = `${p.size}px serif`;
+        ctx.fillText(p.emoji, p.x, p.y);
+        ctx.restore();
+        if (p.y > H + 50) Object.assign(p, makePetal(true));
+      }
+      requestAnimationFrame(drawPetals);
+    }
+    drawPetals();
+
+    // ── INTRO → QUIZ ──────────────────────────────────────────────────────────
+    function startQuiz() {
+      document.getElementById('intro-screen').classList.add('hide');
+      const hdr = document.getElementById('site-header');
+      hdr.classList.add('show');
+      hdr.style.animation = 'fadeDown .9s ease both';
+    }
+
+    // ── WRONG / RIGHT MESSAGES ────────────────────────────────────────────────
+    const wrongLines = [
+      "❌ Mauvaise réponse, ma petite Meryomty ! N'essaie même pas de répondre ça encore 😄🌸",
+      "❌ Nooon ! Mon petit ange sait très bien ce qu'il doit répondre 💕",
+      "❌ Réessaie, la plus mignonne Meryomty ! Ton cœur connaît la vraie réponse 🌹",
+      "❌ Pas du tout ! N'essaie même pas de me faire croire ça, ma petite Meryomty 😏💗",
+      "❌ Fausse réponse… et tu le sais très bien, mon ange adorée 🌷",
+      "❌ Mais voyons, ma jolie Meryomty — n'essaie même plus de prétendre ! 🌺",
+    ];
+    let wrongIdx = 0;
+
+    const rightLines = [
+      "✅ Exactement ! Je le savais, mon petit ange Meryomty 💕🌸",
+      "✅ C'est ça ! Exactement ce que mon cœur voulait entendre 🌹",
+      "✅ Parfait, ma petite Meryomty adorée ! 💖",
+      "✅ Bien sûr que oui, la plus mignonne Meryomty ! 🌷",
+      "✅ La seule bonne réponse, mon ange Meryomty 💗",
+      "✅ Je t'aime encore plus pour ça, ma jolie Meryomty 🌺",
+    ];
+
+    // ── ANSWER ────────────────────────────────────────────────────────────────
+    function answer(btn, isCorrect, qNum) {
+      const card = document.getElementById('q' + qNum);
+      const fb = document.getElementById('fb' + qNum);
+      const nextBtn = document.getElementById('next' + qNum);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      if (isCorrect) {
+        buttons.forEach(b => b.disabled = true);
+        btn.classList.add('correct');
+        fb.className = 'feedback right-msg';
+        fb.textContent = rightLines[(qNum - 1) % rightLines.length];
+        nextBtn.classList.add('visible');
+        // light up the heart
+        const ph = document.getElementById('ph' + qNum);
+        ph.classList.add('lit');
+        ph.textContent = '💖';
+      } else {
+        btn.classList.add('wrong');
+        fb.className = 'feedback wrong-msg';
+        fb.textContent = wrongLines[wrongIdx % wrongLines.length];
+        wrongIdx++;
+        setTimeout(() => {
+          btn.classList.remove('wrong');
+          fb.className = 'feedback'; fb.textContent = '';
+        }, 2000);
+      }
+    }
+
+    function nextQ(current, next) {
+      document.getElementById('q' + current).classList.remove('active');
+      const nc = document.getElementById('q' + next);
+      nc.classList.add('active');
+      nc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function showFinal() {
+      document.getElementById('quiz-section').style.display = 'none';
+      const fin = document.getElementById('final-section');
+      fin.classList.add('visible');
+      fin.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      for (let i = 0; i < 30; i++)petals.push(makePetal(true));
+    }
+  </script>
+</body>
+
+</html>
